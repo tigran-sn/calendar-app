@@ -26,9 +26,11 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './calendar-view.component.html',
   styleUrls: ['./calendar-view.component.scss'],
 })
-export class CalendarViewComponent implements OnInit {
+export class CalendarViewComponent {
   private calendarService = inject(CalendarService);
   private router = inject(Router);
+
+  dateService = inject(DateService);
 
   weekDays: string[] = [];
   calendarDays$: Observable<
@@ -40,7 +42,7 @@ export class CalendarViewComponent implements OnInit {
   >;
   currentDate$: Observable<Date>;
 
-  constructor(public dateService: DateService) {
+  constructor() {
     this.weekDays = this.dateService.getWeekDays();
     this.currentDate$ = this.dateService.getCurrentDate();
 
@@ -68,8 +70,6 @@ export class CalendarViewComponent implements OnInit {
       })
     );
   }
-
-  ngOnInit(): void {}
 
   previousMonth(): void {
     this.currentDate$

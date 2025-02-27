@@ -9,6 +9,20 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'appointment',
+    loadComponent: () =>
+      import(
+        './features/appointment/appointment-form/appointment-form.component'
+      ).then((m) => m.AppointmentFormComponent),
+  },
+  {
+    path: 'appointment/:id',
+    loadComponent: () =>
+      import(
+        './features/appointment/appointment-form/appointment-form.component'
+      ).then((m) => m.AppointmentFormComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
