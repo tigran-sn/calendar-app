@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { Appointment } from '../../../../core/models';
+import { Appointment } from '@core/models';
 
 @Component({
   selector: 'app-appointment-item',

@@ -9,9 +9,9 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
-import { Appointment } from '../../../../core/models';
-import { CalendarService } from '../../../../core/services';
-import { AppointmentItemComponent } from '../../../appointment/appointment-form/appointment-item/appointment-item.component';
+import { Appointment } from '@core/models';
+import { CalendarService } from '@core/services';
+import { AppointmentItemComponent } from '@features/appointment/appointment-form/appointment-item/appointment-item.component';
 
 @Component({
   selector: 'app-calendar-day',

@@ -9,9 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { DateService } from '../../../core/services/date.service';
-import { CalendarService } from '../../../core/services/calendar.service';
-import { Appointment } from '../../../core/models/appointment.model';
+import { DateService } from '@core/services/date.service';
+import { CalendarService } from '@core/services/calendar.service';
+import { Appointment } from '@core/models/appointment.model';
 import { CalendarDayComponent } from './calendar-day/calendar-day.component';
 
 @Component({
