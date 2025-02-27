@@ -1,0 +1,25 @@
+<div
+  class="day-container"
+  [class.other-month]="!isCurrentMonth"
+  [class.today]="isToday"
+  cdkDropList
+  [cdkDropListData]="date"
+  (cdkDropListDropped)="onDrop($event)"
+>
+  <div class="day-header">
+    <span class="day-number">{{ date.getDate() }}</span>
+  </div>
+
+  <div class="appointments-container">
+    @for (appointment of appointments; track appointment.id) {
+    <app-appointment-item
+      [appointment]="appointment"
+      cdkDrag
+      [cdkDragData]="appointment"
+      (edit)="editAppointment(appointment.id)"
+      (delete)="deleteAppointment(appointment.id, $event)"
+    >
+    </app-appointment-item>
+    }
+  </div>
+</div>

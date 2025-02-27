@@ -1,0 +1,19 @@
+<!-- src/app/features/appointment/appointment-item/appointment-item.component.html -->
+<div
+  class="appointment-item"
+  [style.background-color]="appointment.color || '#2196f3'"
+  [matTooltip]="appointment.description || ''"
+  (click)="handleEdit()"
+>
+  <div class="appointment-header">
+    <span class="appointment-time">{{ timeString }}</span>
+    <button
+      mat-icon-button
+      class="delete-button"
+      (click)="handleDelete($event)"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="appointment-title">{{ appointment.title }}</div>
+</div>
