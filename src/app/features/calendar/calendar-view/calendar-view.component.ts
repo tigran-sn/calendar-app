@@ -11,7 +11,7 @@ import { Observable, combineLatest, map } from 'rxjs';
 import { DateService } from '../../../core/services/date.service';
 import { CalendarService } from '../../../core/services/calendar.service';
 import { Appointment } from '../../../core/models/appointment.model';
-import { CalendarDayComponent } from '../calendar-day/calendar-day.component';
+import { CalendarDayComponent } from './calendar-day/calendar-day.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

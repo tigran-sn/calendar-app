@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
-import { Appointment } from '../../../core/models/appointment.model';
-import { CalendarService } from '../../../core/services/calendar.service';
-import { AppointmentItemComponent } from '../../appointment/appointment-item/appointment-item.component';
+import { Appointment } from '../../../../core/models/appointment.model';
+import { CalendarService } from '../../../../core/services/calendar.service';
+import { AppointmentItemComponent } from '../../../appointment/appointment-form/appointment-item/appointment-item.component';
 
 @Component({
   selector: 'app-calendar-day',
