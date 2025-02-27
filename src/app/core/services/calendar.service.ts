@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
-import { Appointment } from '@core/models/appointment.model';
+import { Appointment } from '@core/models';
 
 @Injectable({
   providedIn: 'root',

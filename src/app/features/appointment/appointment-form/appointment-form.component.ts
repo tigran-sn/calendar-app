@@ -18,8 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { switchMap, filter, take, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { CalendarService } from '@core/services/calendar.service';
-import { Appointment } from '@core/models/appointment.model';
+import { CalendarService } from '@core/services';
+import { Appointment } from '@core/models';
 
 @Component({
   selector: 'app-appointment-form',
