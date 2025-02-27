@@ -1,18 +1,18 @@
-// src/app/features/calendar/calendar-view/calendar-view.component.ts
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
+
+import { Observable, combineLatest, map, take } from 'rxjs';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-
-import { Observable, combineLatest, map } from 'rxjs';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { DateService } from '../../../core/services/date.service';
 import { CalendarService } from '../../../core/services/calendar.service';
 import { Appointment } from '../../../core/models/appointment.model';
 import { CalendarDayComponent } from './calendar-day/calendar-day.component';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-calendar-view',
@@ -21,16 +21,16 @@ import { AsyncPipe } from '@angular/common';
     MatIconModule,
     MatCardModule,
     CalendarDayComponent,
+    DragDropModule,
     AsyncPipe,
   ],
   templateUrl: './calendar-view.component.html',
   styleUrls: ['./calendar-view.component.scss'],
 })
 export class CalendarViewComponent {
+  public dateService = inject(DateService);
   private calendarService = inject(CalendarService);
   private router = inject(Router);
-
-  dateService = inject(DateService);
 
   weekDays: string[] = [];
   calendarDays$: Observable<
@@ -72,23 +72,19 @@ export class CalendarViewComponent {
   }
 
   previousMonth(): void {
-    this.currentDate$
-      .subscribe((currentDate) => {
-        const newDate = new Date(currentDate);
-        newDate.setMonth(newDate.getMonth() - 1);
-        this.dateService.setCurrentDate(newDate);
-      })
-      .unsubscribe();
+    this.currentDate$.pipe(take(1)).subscribe((currentDate) => {
+      const newDate = new Date(currentDate);
+      newDate.setMonth(newDate.getMonth() - 1);
+      this.dateService.setCurrentDate(newDate);
+    });
   }
 
   nextMonth(): void {
-    this.currentDate$
-      .subscribe((currentDate) => {
-        const newDate = new Date(currentDate);
-        newDate.setMonth(newDate.getMonth() + 1);
-        this.dateService.setCurrentDate(newDate);
-      })
-      .unsubscribe();
+    this.currentDate$.pipe(take(1)).subscribe((currentDate) => {
+      const newDate = new Date(currentDate);
+      newDate.setMonth(newDate.getMonth() + 1);
+      this.dateService.setCurrentDate(newDate);
+    });
   }
 
   addAppointment(): void {

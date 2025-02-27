@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { Appointment } from '../../../../core/models/appointment.model';
+import { Appointment } from '../../../../core/models';
 
 @Component({
   selector: 'app-appointment-item',
-  imports: [MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [MatIconModule, MatButtonModule, MatTooltipModule, DragDropModule],
   templateUrl: './appointment-item.component.html',
   styleUrls: ['./appointment-item.component.scss'],
 })

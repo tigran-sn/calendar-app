@@ -1,9 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
-import { Appointment } from '../../../../core/models/appointment.model';
-import { CalendarService } from '../../../../core/services/calendar.service';
+import { take } from 'rxjs/operators';
+
+import {
+  CdkDragDrop,
+  DragDropModule,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+
+import { Appointment } from '../../../../core/models';
+import { CalendarService } from '../../../../core/services';
 import { AppointmentItemComponent } from '../../../appointment/appointment-form/appointment-item/appointment-item.component';
 
 @Component({
@@ -12,17 +19,13 @@ import { AppointmentItemComponent } from '../../../appointment/appointment-form/
   templateUrl: './calendar-day.component.html',
   styleUrls: ['./calendar-day.component.scss'],
 })
-export class CalendarDayComponent implements OnInit {
+export class CalendarDayComponent {
   @Input() date: Date = new Date();
   @Input() appointments: Appointment[] = [];
   @Input() isCurrentMonth: boolean = true;
 
-  constructor(
-    private calendarService: CalendarService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {}
+  private calendarService = inject(CalendarService);
+  private router = inject(Router);
 
   get isToday(): boolean {
     const today = new Date();
@@ -33,23 +36,42 @@ export class CalendarDayComponent implements OnInit {
     );
   }
 
-  onDrop(event: CdkDragDrop<Date>): void {
-    const appointmentId = event.item.data.id;
-    const newDate = this.date;
+  get dayId(): string {
+    return `day-${this.date.getFullYear()}-${this.date.getMonth()}-${this.date.getDate()}`;
+  }
+
+  onDrop(event: CdkDragDrop<Appointment[]>): void {
+    console.log('Drop event occurred:', event);
+
+    if (event.previousContainer === event.container) {
+      console.log('Same container, no action needed');
+      return;
+    }
+
+    const appointmentId = event.item.data;
+    console.log('Appointment ID:', appointmentId);
 
     this.calendarService
       .getAppointmentById(appointmentId)
+      .pipe(take(1))
       .subscribe((appointment) => {
+        console.log('Found appointment:', appointment);
+
         if (appointment) {
           const timeDiff =
             appointment.endDate.getTime() - appointment.startDate.getTime();
 
-          const newStartDate = new Date(newDate);
+          const newStartDate = new Date(this.date);
           newStartDate.setHours(appointment.startDate.getHours());
           newStartDate.setMinutes(appointment.startDate.getMinutes());
 
           const newEndDate = new Date(newStartDate.getTime() + timeDiff);
 
+          console.log(
+            'Moving appointment to new dates:',
+            newStartDate,
+            newEndDate
+          );
           this.calendarService.moveAppointment(
             appointmentId,
             newStartDate,

@@ -1,11 +1,11 @@
-// src/app/features/appointment/appointment-form/appointment-form.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +14,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { switchMap, filter, take, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -24,7 +23,6 @@ import { Appointment } from '../../../core/models/appointment.model';
 
 @Component({
   selector: 'app-appointment-form',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatCardModule,
@@ -39,6 +37,11 @@ import { Appointment } from '../../../core/models/appointment.model';
   styleUrls: ['./appointment-form.component.scss'],
 })
 export class AppointmentFormComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private calendarService = inject(CalendarService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   appointmentForm!: FormGroup;
   isEditMode = false;
   appointmentId: string | null = null;
@@ -53,12 +56,7 @@ export class AppointmentFormComponent implements OnInit {
     { value: '#ff9800', label: 'Orange' },
   ];
 
-  constructor(
-    private fb: FormBuilder,
-    private calendarService: CalendarService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+  constructor() {
     this.createForm();
   }
 
@@ -73,7 +71,6 @@ export class AppointmentFormComponent implements OnInit {
       endTimeControl?.updateValueAndValidity();
     });
 
-    // Load appointment data if in edit mode
     this.route.paramMap
       .pipe(
         switchMap((params) => {

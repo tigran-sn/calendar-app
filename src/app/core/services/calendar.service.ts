@@ -9,7 +9,6 @@ import { Appointment } from '../models/appointment.model';
 })
 export class CalendarService {
   private appointmentsSubject = new BehaviorSubject<Appointment[]>([]);
-
   appointments$ = this.appointmentsSubject.asObservable();
 
   constructor() {
@@ -84,16 +83,19 @@ export class CalendarService {
 
   moveAppointment(id: string, newStartDate: Date, newEndDate: Date): void {
     const currentAppointments = this.appointmentsSubject.getValue();
-    const appointment = currentAppointments.find((a) => a.id === id);
 
-    if (appointment) {
-      const updatedAppointment = {
-        ...appointment,
-        startDate: newStartDate,
-        endDate: newEndDate,
-      };
+    const newAppointments = currentAppointments.map((appointment) => {
+      if (appointment.id === id) {
+        return {
+          ...appointment,
+          startDate: newStartDate,
+          endDate: newEndDate,
+        };
+      }
+      return appointment;
+    });
 
-      this.updateAppointment(updatedAppointment);
-    }
+    this.appointmentsSubject.next(newAppointments);
+    this.saveToLocalStorage(newAppointments);
   }
 }
