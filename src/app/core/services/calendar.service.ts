@@ -15,7 +15,7 @@ export class CalendarService {
     const savedAppointments = localStorage.getItem('appointments');
     if (savedAppointments) {
       const appointments = JSON.parse(savedAppointments);
-      appointments.forEach((appointment: any) => {
+      appointments.forEach((appointment: Appointment) => {
         appointment.startDate = new Date(appointment.startDate);
         appointment.endDate = new Date(appointment.endDate);
       });

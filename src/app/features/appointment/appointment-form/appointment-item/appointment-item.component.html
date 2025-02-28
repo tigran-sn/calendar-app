@@ -3,6 +3,11 @@
   [style.background-color]="appointment.color || '#2196f3'"
   [matTooltip]="appointment.description || ''"
   (click)="handleEdit()"
+  (keydown.enter)="handleEdit()"
+  (keydown.space)="handleEdit()"
+  tabindex="0"
+  role="button"
+  [attr.aria-label]="'Edit appointment: ' + appointment.title"
 >
   <div class="appointment-header">
     <span class="appointment-time">{{ timeString }}</span>
@@ -10,6 +15,7 @@
       mat-icon-button
       class="delete-button"
       (click)="handleDelete($event)"
+      aria-label="Delete appointment"
     >
       <mat-icon>close</mat-icon>
     </button>

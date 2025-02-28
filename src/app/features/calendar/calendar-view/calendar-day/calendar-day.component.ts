@@ -1,13 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import { booleanAttribute, Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { take } from 'rxjs/operators';
 
-import {
-  CdkDragDrop,
-  DragDropModule,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
 import { Appointment } from '@core/models';
 import { CalendarService } from '@core/services';
@@ -22,7 +18,7 @@ import { AppointmentItemComponent } from '@features/appointment/appointment-form
 export class CalendarDayComponent {
   @Input() date: Date = new Date();
   @Input() appointments: Appointment[] = [];
-  @Input() isCurrentMonth: boolean = true;
+  @Input({ transform: booleanAttribute }) isCurrentMonth = true;
 
   private calendarService = inject(CalendarService);
   private router = inject(Router);

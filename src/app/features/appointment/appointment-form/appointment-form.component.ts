@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,7 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 
-import { switchMap, filter, take, tap } from 'rxjs/operators';
+import { switchMap, filter, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { CalendarService } from '@core/services';
@@ -61,7 +62,7 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appointmentForm.get('startTime')?.valueChanges.subscribe((value) => {
+    this.appointmentForm.get('startTime')?.valueChanges.subscribe(() => {
       const endTimeControl = this.appointmentForm.get('endTime');
       endTimeControl?.setValidators([
         Validators.required,
@@ -119,7 +120,7 @@ export class AppointmentFormComponent implements OnInit {
     });
   }
 
-  endTimeValidator(control: any): { [key: string]: any } | null {
+  endTimeValidator(control: AbstractControl): Record<string, boolean> | null {
     if (!this.appointmentForm) {
       return null;
     }
