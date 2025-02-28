@@ -1,4 +1,10 @@
-import { booleanAttribute, Component, inject, Input } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  inject,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { take } from 'rxjs/operators';
@@ -6,7 +12,7 @@ import { take } from 'rxjs/operators';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
 import { Appointment } from '@core/models';
-import { CalendarService } from '@core/services';
+import { CalendarService, DateService } from '@core/services';
 import { AppointmentItemComponent } from '@features/appointment/appointment-form/appointment-item/appointment-item.component';
 
 @Component({
@@ -15,13 +21,16 @@ import { AppointmentItemComponent } from '@features/appointment/appointment-form
   templateUrl: './calendar-day.component.html',
   styleUrls: ['./calendar-day.component.scss'],
 })
-export class CalendarDayComponent {
+export class CalendarDayComponent implements OnInit {
   @Input() date: Date = new Date();
   @Input() appointments: Appointment[] = [];
   @Input({ transform: booleanAttribute }) isCurrentMonth = true;
 
   private calendarService = inject(CalendarService);
+  private dateService = inject(DateService);
   private router = inject(Router);
+
+  connectedDayIds: string[] = [];
 
   get isToday(): boolean {
     const today = new Date();
@@ -34,6 +43,12 @@ export class CalendarDayComponent {
 
   get dayId(): string {
     return `day-${this.date.getFullYear()}-${this.date.getMonth()}-${this.date.getDate()}`;
+  }
+
+  ngOnInit(): void {
+    this.dateService.connectedDayIds$.pipe(take(1)).subscribe((ids) => {
+      this.connectedDayIds = ids;
+    });
   }
 
   onDrop(event: CdkDragDrop<Appointment[]>): void {

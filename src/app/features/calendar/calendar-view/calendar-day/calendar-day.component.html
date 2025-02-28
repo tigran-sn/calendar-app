@@ -6,7 +6,7 @@
   [id]="dayId"
   [cdkDropListData]="appointments"
   cdkDropListSortingDisabled
-  cdkDropListConnectedTo="all-days"
+  [cdkDropListConnectedTo]="connectedDayIds"
   (cdkDropListDropped)="onDrop($event)"
   (dblclick)="createNewAppointmentWithDate()"
   tabindex="0"

@@ -7,11 +7,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class DateService {
   private currentDateSubject = new BehaviorSubject<Date>(new Date());
-
+  private connectedDayIdsSubject = new BehaviorSubject<string[]>([]);
   currentDate$ = this.currentDateSubject.asObservable();
+  connectedDayIds$ = this.connectedDayIdsSubject.asObservable();
 
   setCurrentDate(date: Date): void {
     this.currentDateSubject.next(date);
+  }
+
+  updateConnectedDayIds(ids: string[]): void {
+    this.connectedDayIdsSubject.next(ids);
   }
 
   getCurrentDate(): Observable<Date> {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -27,7 +27,7 @@ import { CalendarDayComponent } from './calendar-day/calendar-day.component';
   templateUrl: './calendar-view.component.html',
   styleUrls: ['./calendar-view.component.scss'],
 })
-export class CalendarViewComponent {
+export class CalendarViewComponent implements OnInit {
   public dateService = inject(DateService);
   private calendarService = inject(CalendarService);
   private router = inject(Router);
@@ -69,6 +69,17 @@ export class CalendarViewComponent {
         });
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.calendarDays$.subscribe((days) => {
+      this.dateService.updateConnectedDayIds(
+        days.map(
+          (day) =>
+            `day-${day.date.getFullYear()}-${day.date.getMonth()}-${day.date.getDate()}`
+        )
+      );
+    });
   }
 
   previousMonth(): void {
