@@ -85,4 +85,12 @@ export class CalendarDayComponent {
     event.stopPropagation();
     this.calendarService.deleteAppointment(id);
   }
+
+  createNewAppointmentWithDate(): void {
+    this.router.navigate(['/appointment'], {
+      queryParams: {
+        date: this.date.toISOString(),
+      },
+    });
+  }
 }

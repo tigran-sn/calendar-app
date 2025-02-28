@@ -8,6 +8,9 @@
   cdkDropListSortingDisabled
   cdkDropListConnectedTo="all-days"
   (cdkDropListDropped)="onDrop($event)"
+  (dblclick)="createNewAppointmentWithDate()"
+  tabindex="0"
+  role="button"
 >
   <div class="day-header">
     <span class="day-number">{{ date.getDate() }}</span>
@@ -21,6 +24,7 @@
       [cdkDragData]="appointment.id"
       (edit)="editAppointment(appointment.id)"
       (delete)="deleteAppointment(appointment.id, $event)"
+      (doubleClick)="createNewAppointmentWithDate()"
     >
       <div *cdkDragPreview class="appointment-preview">
         {{ appointment.title }}

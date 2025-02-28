@@ -62,6 +62,17 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
+      if (params['date']) {
+        const prefillDate = new Date(params['date']);
+        if (!isNaN(prefillDate.getTime())) {
+          this.appointmentForm.patchValue({
+            date: prefillDate,
+          });
+        }
+      }
+    });
+
     this.appointmentForm.get('startTime')?.valueChanges.subscribe(() => {
       const endTimeControl = this.appointmentForm.get('endTime');
       endTimeControl?.setValidators([
