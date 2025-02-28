@@ -4,11 +4,21 @@
   </div>
 
   <div class="actions">
-    <button mat-button routerLink="/">
+    <button
+      mat-button
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>calendar_today</mat-icon>
       Calendar
     </button>
-    <button mat-button routerLink="/appointment">
+    <button
+      mat-button
+      routerLink="/appointment"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <mat-icon>add</mat-icon>
       New Event
     </button>
