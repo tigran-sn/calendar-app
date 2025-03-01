@@ -10,7 +10,8 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
     .delete-button {
-      visibility: visible;
+      visibility: visible !important;
+      color: #fff;
     }
   }
 
@@ -34,10 +35,6 @@
 
     .delete-button {
       visibility: hidden;
-      line-height: 20px;
-      width: 20px;
-      height: 20px;
-      margin: -4px;
 
       .mat-icon {
         font-size: 14px;
