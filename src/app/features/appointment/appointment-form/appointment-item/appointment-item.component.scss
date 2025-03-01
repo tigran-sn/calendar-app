@@ -26,13 +26,6 @@
       opacity: 0.9;
     }
 
-    .appointment-title {
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     .delete-button {
       visibility: hidden;
 
@@ -43,5 +36,15 @@
         width: 14px;
       }
     }
+  }
+
+  .appointment-title {
+    font-weight: 500;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
