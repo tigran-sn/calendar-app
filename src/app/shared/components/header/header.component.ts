@@ -18,6 +18,4 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
-  title = 'Calendar';
-}
+export class HeaderComponent {}

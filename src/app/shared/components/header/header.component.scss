@@ -8,11 +8,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-  font-size: 18px;
-  font-weight: 500;
-  color: inherit;
-  text-decoration: none;
+.logo-container {
+  display: flex;
+  align-items: center;
+  .logo {
+    height: 50px;
+    display: block;
+  }
 }
 
 .actions {

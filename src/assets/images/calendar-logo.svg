@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60">
+  <!-- Main background shape for the logo - left side circle -->
+  <circle cx="30" cy="30" r="26" fill="#3f51b5" />
+  
+  <!-- Calendar page background -->
+  <rect x="16" y="16" width="28" height="28" rx="2" fill="#ffffff" />
+  
+  <!-- Calendar rings -->
+  <circle cx="22" cy="16" r="2" fill="#ff4081" />
+  <circle cx="38" cy="16" r="2" fill="#ff4081" />
+  
+  <!-- Calendar grid lines -->
+  <line x1="16" y1="24" x2="44" y2="24" stroke="#e0e0e0" stroke-width="1" />
+  <line x1="16" y1="32" x2="44" y2="32" stroke="#e0e0e0" stroke-width="1" />
+  <line x1="24" y1="16" x2="24" y2="44" stroke="#e0e0e0" stroke-width="1" />
+  <line x1="36" y1="16" x2="36" y2="44" stroke="#e0e0e0" stroke-width="1" />
+  
+  <!-- Calendar highlight date -->
+  <rect x="24" y="32" width="12" height="8" fill="#ff4081" />
+  <text x="30" y="38.5" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#ffffff" text-anchor="middle">15</text>
+  
+  <!-- Text "Calendar" -->
+  <text x="70" y="38" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#3f51b5">Calendar</text>
+</svg>
