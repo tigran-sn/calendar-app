@@ -24,7 +24,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Run Linter
+        run: npm run lint
+
       - name: Build Angular App
+        if: success()
         run: npm run build -- --configuration production --base-href "/calendar-app/"
 
       - name: Deploy to GitHub Pages
